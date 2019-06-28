@@ -8,10 +8,15 @@ node {
          stage('Test') {
 		  bat label: 'Maven Test', returnStatus: true, script: 'mvn test'
         }
-        stage('Run') {
+        /*stage('Run') {
 		  bat label: 'Maven Run', returnStatus: true, script: 'mvn install -DskipTests'
         }
         stage('SBRun') {
 		  bat label: 'Maven SBRun', returnStatus: true, script: 'mvn spring-boot:run'
-        }
+        }*/
+	
+	stage('SBRun') {
+		def mvnHome = tool name: 'LMaven', type: 'maven'
+		bat "${mvnHome}/bin/mvn package"
+	}
 }
